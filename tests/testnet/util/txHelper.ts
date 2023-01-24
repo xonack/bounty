@@ -44,7 +44,7 @@ export async function sendTx(tx: bsv.Transaction): Promise<string> {
         return txid
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            console.log('sendTx error', JSON.stringify(error.response))
+            console.log('sendTx error', error.response.data)
         }
 
         throw error
