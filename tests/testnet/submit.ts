@@ -166,7 +166,7 @@ async function main() {
 
     // 4. FAILS bc 4th submission when MAX_SUBMISSIONS === 3
     const newSubmit4 = prevInstance.next()
-    const hunter4 = hunter1
+    const hunter4 = Ripemd160(toByteString('04'))
     const submission4 = submission1
     // get utxos
     utxos = await utxoMgr.getUtxos(fee)
