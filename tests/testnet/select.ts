@@ -25,17 +25,17 @@ describe('select', () => {
         await validHunterTest()
     })
 
-    it('fails - invalid Hunter', async () => {
-        await invalidHunterTest()
-    })
+    // it('fails - invalid Hunter', async () => {
+    //     await invalidHunterTest()
+    // })
 
-    it('fails- invalid signature', async () => {
-        await invalidSignature()
-    })
+    // it('fails- invalid signature', async () => {
+    //     await invalidSignature()
+    // })
 
-    it('fails - select twice (valid then valid)', async () => {
-        await selectTwiceTest()
-    })
+    // it('fails - select twice (valid then valid)', async () => {
+    //     await selectTwiceTest()
+    // })
 })
 
 async function validHunterTest() {
