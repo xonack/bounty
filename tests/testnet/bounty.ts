@@ -107,20 +107,12 @@ async function testBountyLifecycle() {
     // 3 - claim
     const claimInputIndex = 0
     nextInstance = instance.next()
-    console.log('Here 1')
-    // const unsignedClaimTx = instance.getClaimTx(
-    //     winnerPublicKey,
-    //     winnerPrivateKey,
-    //     selectTx
-    // )
     const unsignedClaimTx = instance.getClaimTx(
         winnerPublicKey,
         winnerPrivateKey,
         selectTx
     )
-    console.log('Here 2')
     const claimTx = await signAndSend(unsignedClaimTx)
-    console.log('Here 3')
     console.log('Claim tx:', claimTx.id)
     utxoMgr.collectUtxoFrom(claimTx)
 }
