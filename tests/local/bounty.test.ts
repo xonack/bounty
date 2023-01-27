@@ -50,6 +50,7 @@ async function testBountyLifecycle() {
     const deployTx = instance.getDeployTx(utxos, 1)
 
     // 1 - submit
+    console.log('submit')
     // 1. build a new contract instance
     let nextInstance = instance.next()
     // 2. apply the updates on the new instance.
@@ -83,6 +84,7 @@ async function testBountyLifecycle() {
 
     instance = nextInstance
     // 2 - select
+    console.log('select')
     const selectInputIndex = 1
     nextInstance = instance.next()
     nextInstance.winner = hunter1
@@ -105,13 +107,16 @@ async function testBountyLifecycle() {
 
     instance = nextInstance
     // 3 - claim
+    console.log('claim')
     const claimInputIndex = 0
     nextInstance = instance.next()
+    console.log('here 1')
     const claimTx = instance.getClaimTx(
         winnerPublicKey,
         winnerPrivateKey,
         selectTx
     )
+    console.log('here 2')
     const claimResult = instance.verify((self) => {
         self.claim(
             Sig(claimTx.getSignature(claimInputIndex) as string),

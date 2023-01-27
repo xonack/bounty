@@ -201,18 +201,26 @@ export class Bounty extends SmartContract {
         prevTx: bsv.Transaction
     ): bsv.Transaction {
         const inputIndex = 0
-        return new bsv.Transaction().addInputFromPrevTx(prevTx).setInputScript(
-            {
-                inputIndex,
-                privateKey,
-            },
-            (tx) => {
-                const sig = tx.getSignature(inputIndex)
-                this.unlockFrom = { tx, inputIndex }
-                return this.getUnlockingScript((self) => {
-                    self.claim(Sig(sig as string), PubKey(toHex(pubKey)))
+        return new bsv.Transaction()
+            .addInputFromPrevTx(prevTx)
+            .setInputScript(
+                {
+                    inputIndex,
+                    privateKey,
+                },
+                (tx) => {
+                    const sig = tx.getSignature(inputIndex)
+                    this.unlockFrom = { tx, inputIndex }
+                    return this.getUnlockingScript((self) => {
+                        self.claim(Sig(sig as string), PubKey(toHex(pubKey)))
+                    })
+                }
+            )
+            .addOutput(
+                new bsv.Transaction.Output({
+                    script: bsv.Script.buildPublicKeyHashOut(pubKey),
+                    satoshis: this.balance,
                 })
-            }
-        )
+            )
     }
 }
